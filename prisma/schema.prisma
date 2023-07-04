@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id String @id @unique
+  email String @unique
+  name String
+  password String @db.VarChar(20)
+  avatar String
+  sessions sessions[]
+  publications publications[]
+  createdAt DateTime @default(now()) @db.Timestamptz(0)
+  updatedAt DateTime @updatedAt @db.Timestamptz(0)
+
+  @@map("users")
+}
+
+model sessions {
+  id String @id @unique
+  token String
+  user_id String
+  user users @relation(fields: [user_id], references: [id])
+  createdAt DateTime @default(now()) @db.Timestamptz(0)
+  expiresAt DateTime @db.Timestamptz(0)
+
+  @@map("sessions")
+}
+
+model publications {
+  id String @id @unique
+  image String
+  title String
+  text String
+  dateToPublish DateTime @db.Date
+  published Boolean @default(false)
+  socialMedia String
+  user_id String
+  user users @relation(fields: [user_id], references: [id])
+  createdAt DateTime @default(now()) @db.Timestamptz(0)
+  updatedAt DateTime @updatedAt @db.Timestamptz(0)
+
+  @@map("publications")
+}
