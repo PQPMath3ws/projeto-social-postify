@@ -11,7 +11,7 @@ model users {
   id String @id @unique
   email String @unique
   name String
-  password String @db.VarChar(20)
+  password String
   avatar String
   sessions sessions[]
   publications publications[]
