@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcrypt';
-import { HttpException, HttpStatus, Injectable, Post } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import { UsersRepository } from '../repositories/users.repository';
 
@@ -7,7 +7,6 @@ import { UsersRepository } from '../repositories/users.repository';
 export class UsersService {
   constructor(private userRepository: UsersRepository) {}
 
-  @Post(`user`)
   async registerUser(
     name: string,
     email: string,
