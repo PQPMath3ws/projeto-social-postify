@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { sessions } from '@prisma/client';
 import { v4 as uuidv4 } from 'uuid';
 
 import { PrismaService } from '../../database/prisma.service';
@@ -18,6 +19,14 @@ export class AuthenticationPrismaRepository
         token,
         user_id,
         expiresAt,
+      },
+    });
+  }
+
+  async get(token: string): Promise<sessions> {
+    return await this.prisma.sessions.findFirst({
+      where: {
+        token: token,
       },
     });
   }
