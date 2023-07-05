@@ -18,7 +18,7 @@ export class PublicationsController {
     return this.publicationsService.getUserPublications(request.user_id);
   }
 
-  @Post('publications')
+  @Post('publication')
   async createUserPublication(
     @Req() request: RequestWithUserId,
     @Body() body: CreateUserPublicationBody,

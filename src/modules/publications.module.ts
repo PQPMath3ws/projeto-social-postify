@@ -43,6 +43,8 @@ import { PublicationsService } from '../services/publications.service';
 })
 export class PublicationsModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthenticationMiddleware).forRoutes('publications');
+    consumer
+      .apply(AuthenticationMiddleware)
+      .forRoutes('publication', 'publications');
   }
 }
